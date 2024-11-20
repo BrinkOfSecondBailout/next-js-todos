@@ -1,6 +1,5 @@
-// "use client";
-import { addTask, getTasks } from "./actions";
-// import { useState } from "react";
+import Form from "../../components/form";
+import { getTasks } from "../../actions/actions";
 
 export default async function TodoPage() {
     const tasks = await getTasks();
@@ -9,14 +8,7 @@ export default async function TodoPage() {
         <main>
             <h1>To Do App</h1>
 
-            <form action={addTask}>
-                <input type="text" 
-                name="task" 
-                placeholder="Add task" 
-                required />
-                <button type="submit">Add Task</button>
-            </form>
-
+            <Form />
             <ul>
                 {tasks.map((task) => (
                     <li key={task.id}>{task.content}</li>
@@ -25,8 +17,3 @@ export default async function TodoPage() {
         </main>
     )
 }
-
-// function TodoClient({initialTasks}: { initialTasks: { id: number, content: string }[] }) {
-//     const [tasks, setTasks] = useState(initialTasks);
-//     const [taskInput, setTaskInput] = useState("");
-// }
