@@ -4,10 +4,8 @@ import {useFormStatus} from 'react-dom';
 const button = () => {
     const {pending} = useFormStatus();
     return (
-        <button type="submit">
-            {
-                pending ? "Adding..." : "Add"
-            }
+        <button disabled={pending} type="submit">
+            Add
         </button>
     )
 }

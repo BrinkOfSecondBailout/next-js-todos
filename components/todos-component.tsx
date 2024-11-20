@@ -22,6 +22,10 @@ export default function TodosComponent({tasks}: TodosComponentProps) {
         <>
             <form ref={ref} action={async formData => {
                 ref.current?.reset();
+                addOptimisticTodo({
+                    id: Math.random(),
+                    content: formData.get("task") as string,
+                });
                 await addTask(formData);
             }}>
                 <input type="text" 
@@ -32,7 +36,7 @@ export default function TodosComponent({tasks}: TodosComponentProps) {
             </form>
 
             <ul>
-                {tasks.map((task) => (
+                {optimisticTodos.map((task) => (
                     <li key={task.id}>{task.content}</li>
                 ))}
             </ul>

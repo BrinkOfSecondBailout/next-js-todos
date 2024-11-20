@@ -7,11 +7,15 @@ const prisma = new PrismaClient();
 export async function addTask(formData: FormData) {
     const content = formData.get("task") ;
 
-    await prisma.task.create({
-        data: { 
-            content: content as string 
-        },
-    });
+    try {
+        await prisma.task.create({
+            data: { 
+                content: content as string 
+            },
+        });
+    } catch (e) {
+        console.log(e);
+    }
 
     revalidatePath('/todos');
 }
