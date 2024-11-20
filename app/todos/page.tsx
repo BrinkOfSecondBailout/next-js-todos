@@ -1,5 +1,5 @@
-import Form from "../../components/form";
 import { getTasks } from "../../actions/actions";
+import TodosComponent from "../../components/todos-component";
 
 export default async function TodoPage() {
     const tasks = await getTasks();
@@ -8,12 +8,8 @@ export default async function TodoPage() {
         <main>
             <h1>To Do App</h1>
 
-            <Form />
-            <ul>
-                {tasks.map((task) => (
-                    <li key={task.id}>{task.content}</li>
-                ))}
-            </ul>
+            <TodosComponent tasks={tasks}/>
+            
         </main>
     )
 }
