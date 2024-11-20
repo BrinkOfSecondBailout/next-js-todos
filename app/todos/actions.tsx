@@ -1,14 +1,16 @@
 "use server";
-
+import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-type Task = {
-    id: number;
-    content: string;
-};
+const prisma = new PrismaClient();
 
-// Mock database
-let tasks: Task[] = [];
+// type Task = {
+//     id: number;
+//     content: string;
+// };
+
+// // Mock database
+// let tasks: Task[] = [];
 
 // Add task action
 export async function addTask(formData: FormData) {
@@ -18,12 +20,17 @@ export async function addTask(formData: FormData) {
         throw new Error("Invalid task content");
     }
 
-    const newTask: Task = { id : Date.now(), content };
-    tasks.push(newTask);
+    await prisma.task.create({
+        data: { content },
+    });
+
     revalidatePath('/todos');
 }
 
 // Get tasks action (to simulate fetching tasks from a database)
 export async function getTasks(): Promise<Task[]> {
+    const tasks = await prisma.task.findMany({
+        orderBy: { createdAt: "desc" },
+    });
     return tasks;
 }
