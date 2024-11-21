@@ -2,7 +2,7 @@
 
 import React, { useOptimistic, useRef } from 'react'
 import { addTask } from '../actions/actions';
-import Button from './button';
+import AddTaskButton from './add-task-button';
 
 type Todo = {
     id: number;
@@ -32,7 +32,7 @@ export default function TodosComponent({tasks}: TodosComponentProps) {
                 name="task" 
                 placeholder="Add task" 
                 required />
-                <Button />
+                <AddTaskButton />
             </form>
 
             <ul>
